@@ -3,8 +3,12 @@ package com.orderbook.backend.engine;
 import com.orderbook.backend.model.Order;
 
 import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.List;
+import com.orderbook.backend.model.Trade;
 
 public class OrderBook {
+    private final List<Trade> trades = new ArrayList<>();
 
     private final PriorityQueue<Order> buyOrders =
             new PriorityQueue<>((a, b) ->
@@ -38,6 +42,14 @@ public class OrderBook {
 
             int tradedQuantity =
                     Math.min(bestBuy.getQuantity(), bestSell.getQuantity());
+                    
+            Trade trade = new Trade(
+                    bestBuy.getId(),
+                    bestSell.getId(),
+                    bestSell.getPrice(),
+                    tradedQuantity);
+
+            trades.add(trade);       
 
             bestBuy.setQuantity(
                     bestBuy.getQuantity() - tradedQuantity);
@@ -67,5 +79,8 @@ public class OrderBook {
 
     public PriorityQueue<Order> getSellOrders() {
         return sellOrders;
+    }
+    public List<Trade> getTrades() {
+        return trades;
     }
 }

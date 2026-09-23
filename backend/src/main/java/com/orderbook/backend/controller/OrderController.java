@@ -20,4 +20,10 @@ public class OrderController {
     public OrderBook getOrderBook() {
         return orderBook;
     }
+
+    @GetMapping("/trades")
+    public Object getTrades() {
+        return orderBook.getTrades();
+    }
+    
 }
