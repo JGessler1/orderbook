@@ -4,6 +4,7 @@ import com.orderbook.backend.engine.OrderBook;
 import com.orderbook.backend.model.Order;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -25,5 +26,4 @@ public class OrderController {
     public Object getTrades() {
         return orderBook.getTrades();
     }
-    
 }
